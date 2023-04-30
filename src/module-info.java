@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -6,4 +7,5 @@
  *
  */
 module typing_Game {
+	requires java.desktop;
 }

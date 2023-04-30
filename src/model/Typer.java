@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
@@ -99,7 +100,7 @@ public class Typer {
 		
 		}
 	
-	public void countLevel() {
+	public void levelCounter() {
 		/*
 		 * we will call this every time the user inputs a word correctly
 		 */
@@ -109,4 +110,26 @@ public class Typer {
 			currentLevel++;
 		}
 	}
+	
+	/*
+	 * this methods selects a random words to appear
+	 */
+	public String selectRandomWord() {
+		ArrayList<String> input = allLevels.get(currentLevel);
+		Random r = new Random();
+		int randomNumber = r.nextInt(input.size());
+		String output = input.get(randomNumber);
+		levelCounter();
+		return output;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

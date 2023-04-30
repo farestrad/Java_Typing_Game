@@ -22,6 +22,9 @@ public class Typer {
 	public ArrayList<String> level8 = new ArrayList<>();
 
 	public ArrayList<ArrayList<String>> allLevels = new ArrayList<>();
+	
+	int count = 0; //keep count of how many words solved
+	int currentLevel = 0; //keep track of which level user is at
 	/**
 	 * Launch the application.
 	 */
@@ -62,6 +65,11 @@ public class Typer {
 		allLevels.add(level7);
 		allLevels.add(level8);
 		
+		for(int i = 1; i <=8; i++) {
+			//because the text files matches the arrayLists names we can use that with index i to add them 
+			readText("Words/level" + i + ".txt", allLevels.get(i));
+		}
+		
 	}
 
 
@@ -90,4 +98,15 @@ public class Typer {
 		}
 		
 		}
+	
+	public void countLevel() {
+		/*
+		 * we will call this every time the user inputs a word correctly
+		 */
+		count++;
+		if(count %9 == 0) {
+			count = 0;
+			currentLevel++;
+		}
+	}
 }

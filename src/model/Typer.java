@@ -345,7 +345,7 @@ public class Typer {
 		for(int i = 0; i < allLevels.size(); i++) {
 			allLevels.get(i).clear();
 		}
-		//read all text docs again
+		//read all text files again
 		for(int i = 0; i < 8; i++) {
 			readText("Words/level" + (i+1) +".txt", allLevels.get(i));
 			//we did this because the select random words method removes selected words

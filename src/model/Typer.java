@@ -301,6 +301,8 @@ public class Typer {
 		currentWord.setText(original); //set the label to the random word
 		original2 = selectRandomWord(); //get another random word
 		nextWord.setText(original2); //set next to the second random word
+		currentScore = 0;
+		scoreLable.setText("Score: " + currentScore);
 	}
 	
 	/*
@@ -359,6 +361,7 @@ public class Typer {
 		}
 		sec = 90;
 		timerLable.setText("Time: " + sec);
+		Enterbtn.setEnabled(false);
 		userinput.setEnabled(false);
 		startBtn.setEnabled(true);
 		frame.getRootPane().setDefaultButton(startBtn);

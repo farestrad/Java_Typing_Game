@@ -45,6 +45,7 @@ public class Typer {
 	int currentScore = 0;
 	private JTextField userinput;
 	private JButton Enterbtn;
+	private JLabel scoreLable;
 	/**
 	 * Launch the application.
 	 */
@@ -77,36 +78,43 @@ public class Typer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
+		
+		scoreLable = new JLabel("\"\"");
+		GridBagConstraints gbc_scoreLable = new GridBagConstraints();
+		gbc_scoreLable.insets = new Insets(0, 0, 5, 0);
+		gbc_scoreLable.gridx = 7;
+		gbc_scoreLable.gridy = 0;
+		panel.add(scoreLable, gbc_scoreLable);
 		
 		currentWord = new JLabel("\"\"");
 		currentWord.setFont(new Font("Dialog", Font.BOLD, 16));
 		GridBagConstraints gbc_currentWord = new GridBagConstraints();
-		gbc_currentWord.insets = new Insets(0, 0, 5, 0);
-		gbc_currentWord.gridx = 6;
+		gbc_currentWord.insets = new Insets(0, 0, 5, 5);
+		gbc_currentWord.gridx = 3;
 		gbc_currentWord.gridy = 2;
 		panel.add(currentWord, gbc_currentWord);
 		
 		nextWord = new JLabel("\"\"");
 		nextWord.setFont(new Font("Dialog", Font.BOLD, 13));
 		GridBagConstraints gbc_nextWord = new GridBagConstraints();
-		gbc_nextWord.insets = new Insets(0, 0, 5, 0);
-		gbc_nextWord.gridx = 6;
+		gbc_nextWord.insets = new Insets(0, 0, 5, 5);
+		gbc_nextWord.gridx = 3;
 		gbc_nextWord.gridy = 3;
 		panel.add(nextWord, gbc_nextWord);
 		
 		userinput = new JTextField();
 		userinput.setEnabled(false);
 		GridBagConstraints gbc_userinput = new GridBagConstraints();
-		gbc_userinput.insets = new Insets(0, 0, 5, 0);
+		gbc_userinput.insets = new Insets(0, 0, 5, 5);
 		gbc_userinput.fill = GridBagConstraints.HORIZONTAL;
-		gbc_userinput.gridx = 6;
+		gbc_userinput.gridx = 3;
 		gbc_userinput.gridy = 4;
 		panel.add(userinput, gbc_userinput);
 		userinput.setColumns(10);
@@ -126,7 +134,8 @@ public class Typer {
 			}
 		});
 		GridBagConstraints gbc_Enterbtn = new GridBagConstraints();
-		gbc_Enterbtn.gridx = 6;
+		gbc_Enterbtn.insets = new Insets(0, 0, 5, 5);
+		gbc_Enterbtn.gridx = 3;
 		gbc_Enterbtn.gridy = 5;
 		panel.add(Enterbtn, gbc_Enterbtn);
 		

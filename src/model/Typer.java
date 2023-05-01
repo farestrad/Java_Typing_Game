@@ -37,6 +37,7 @@ public class Typer {
 	String original2;
 	int sec = 90;
 	Timer t; //imports timer class
+	int streak = 0;
 	
 	public ArrayList<String> level1 = new ArrayList<>();
 	public ArrayList<String> level2 = new ArrayList<>();
@@ -151,6 +152,19 @@ public class Typer {
 					game();
 					userinput.setText("");
 					userinput.requestFocusInWindow();//auto focus so user can type directly without clicking on it with mouse
+					streak++;
+					if(streak==5) {
+						streak = 0;
+						sec += 5;
+						timerLable.setText("Timer: " + sec);
+					}
+					
+				}
+				else {
+				if(!userWord.equals(original)) {
+					sec -=5;
+					timerLable.setText("Timer: " + sec);
+				}
 				}
 			}
 		});
@@ -164,11 +178,11 @@ public class Typer {
 		//in the next line "Icons/play.png" is the path to the icon
 		play = new ImageIcon("Icons/play.png");
 		Image img1 = play.getImage();
-		Image newPlay = img1.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-		play = new ImageIcon(newPlay);
-		startBtn.setIcon(play);
-		startBtn.setBackground(Color.GREEN);
-		startBtn.addActionListener(new ActionListener() {
+		Image newPlay = img1.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH); //resize the img
+		play = new ImageIcon(newPlay);//assign play to the newly created img
+		startBtn.setIcon(play); //set icon
+		startBtn.setBackground(Color.GREEN); //set background
+		startBtn.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				time();
 				Enterbtn.setEnabled(true);

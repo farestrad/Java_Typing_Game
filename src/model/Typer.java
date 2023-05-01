@@ -60,6 +60,7 @@ public class Typer {
 	private JButton startBtn;
 	
 	ImageIcon play, again;
+	private JButton restartBtn;
 	
 	/**
 	 * Launch the application.
@@ -164,6 +165,8 @@ public class Typer {
 				if(!userWord.equals(original)) {
 					sec -=5;
 					timerLable.setText("Timer: " + sec);
+					userinput.setText("");
+					game();
 				}
 				}
 			}
@@ -198,6 +201,19 @@ public class Typer {
 		gbc_startBtn.gridx = 3;
 		gbc_startBtn.gridy = 6;
 		panel.add(startBtn, gbc_startBtn);
+		
+		restartBtn = new JButton("Restart");
+		restartBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//we want to resetgame here so we will do the method somewhere else then use it as a helper
+				JOptionPane.showMessageDialog(null, "GAME OVER!" + "\n" + "Your final score is: " + currentScore);
+				resetGame();
+			}
+		});
+		GridBagConstraints gbc_restartBtn = new GridBagConstraints();
+		gbc_restartBtn.gridx = 7;
+		gbc_restartBtn.gridy = 6;
+		panel.add(restartBtn, gbc_restartBtn);
 		
 		allLevels.add(level1);
 		allLevels.add(level2);
@@ -305,7 +321,7 @@ public class Typer {
 			userinput.setEnabled(false);
 			Enterbtn.setEnabled(false);
 			sec = 90;
-			//resetGame
+			resetGame();
 		}
 		sec--;
 		timerLable.setText("Time: " + sec);
@@ -314,6 +330,37 @@ public class Typer {
 	t.start(); //starts timer when this method is called
 	}
 	
+	
+	public void resetGame() {
+		//clear allLevels array list
+		for(int i = 0; i < allLevels.size(); i++) {
+			allLevels.get(i).clear();
+		}
+		//read all text docs again
+		for(int i = 0; i < 8; i++) {
+			readText("Words/level" + (i+1) +".txt", allLevels.get(i));
+			//we did this because the select random words method removes selected words
+		}
+		//clear all vars
+		count = 0;
+		currentLevel = 0;
+		currentScore = 0;
+		scoreLable.setText("Score: " + currentScore);
+		original = "";
+		if(sec != 90) {
+			t.stop();
+		}
+		sec = 90;
+		timerLable.setText("Time: " + sec);
+		userinput.setEnabled(false);
+		startBtn.setEnabled(true);
+		frame.getRootPane().setDefaultButton(startBtn);
+		frame.repaint();
+		userinput.setText("");
+		userinput.requestFocusInWindow();
+		firstGame();
+		
+	}
 	
 	
 	

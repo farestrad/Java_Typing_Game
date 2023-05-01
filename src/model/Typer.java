@@ -22,6 +22,8 @@ public class Typer {
 	
 	JLabel currentWord; //define the jLabels here so that they are used globally
 	JLabel nextWord;
+	String original;
+	String original2;
 	
 	public ArrayList<String> level1 = new ArrayList<>();
 	public ArrayList<String> level2 = new ArrayList<>();
@@ -100,11 +102,13 @@ public class Typer {
 		allLevels.add(level7);
 		allLevels.add(level8);
 		
-		for(int i = 1; i <=8; i++) {
+		for(int i = 0;  i < 8; i++) {
 			//because the text files matches the arrayLists names we can use that with index i to add them 
-			readText("Words/level" + i + ".txt", allLevels.get(i));
+			readText("Words/level" + (i+1) + ".txt", allLevels.get(i));
 		}
 		
+		//call first game method in initialize
+		firstGame();
 	}
 
 
@@ -157,9 +161,30 @@ public class Typer {
 		return output;
 	}
 	
+	/*
+	 * Create a method that takes the output from randomSelectedWords
+	 * and stores them in Strings
+	 * this method will call randomSelectedWords twice first time for current word and another for next word
+	 */
 	
+	public void firstGame() { //this method is only called the very first time once game is launched or restarted
+		original = selectRandomWord(); //get a random word
+		currentWord.setText(original); //set the label to the random word
+		original2 = selectRandomWord(); //get another random word
+		nextWord.setText(original2); //set next to the second random word
+	}
 	
-	
+	/*
+	 * This method will take the word displayed in nextWord label and display it in current word label
+	 * and will call random word once and display output as nextWord label
+	 * we call this method everytime the enter button is clicked
+	 */
+	public void game() {
+		original2 = selectRandomWord(); //get a new random word
+		original = nextWord.getText(); //set text of original to the String in nextLabel
+		currentWord.setText(original); //now current word is original which is what used to be 'nextWord'
+		nextWord.setText(original2); //now nextWord is the new randomly selected word.
+	}
 	
 	
 	

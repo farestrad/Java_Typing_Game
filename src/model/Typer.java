@@ -68,17 +68,25 @@ public class Typer {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel currentWord = new JLabel("\"\"");
 		currentWord.setFont(new Font("Dialog", Font.BOLD, 16));
 		GridBagConstraints gbc_currentWord = new GridBagConstraints();
+		gbc_currentWord.insets = new Insets(0, 0, 5, 0);
 		gbc_currentWord.gridx = 6;
 		gbc_currentWord.gridy = 2;
 		panel.add(currentWord, gbc_currentWord);
+		
+		JLabel nextWord = new JLabel("\"\"");
+		nextWord.setFont(new Font("Dialog", Font.BOLD, 13));
+		GridBagConstraints gbc_nextWord = new GridBagConstraints();
+		gbc_nextWord.gridx = 6;
+		gbc_nextWord.gridy = 3;
+		panel.add(nextWord, gbc_nextWord);
 		
 		allLevels.add(level1);
 		allLevels.add(level2);

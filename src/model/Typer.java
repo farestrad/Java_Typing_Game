@@ -20,6 +20,9 @@ public class Typer {
 
 	private JFrame frame;
 	
+	JLabel currentWord; //define the jLabels here so that they are used globally
+	JLabel nextWord;
+	
 	public ArrayList<String> level1 = new ArrayList<>();
 	public ArrayList<String> level2 = new ArrayList<>();
 	public ArrayList<String> level3 = new ArrayList<>();
@@ -73,7 +76,7 @@ public class Typer {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel currentWord = new JLabel("\"\"");
+		currentWord = new JLabel("\"\"");
 		currentWord.setFont(new Font("Dialog", Font.BOLD, 16));
 		GridBagConstraints gbc_currentWord = new GridBagConstraints();
 		gbc_currentWord.insets = new Insets(0, 0, 5, 0);
@@ -81,7 +84,7 @@ public class Typer {
 		gbc_currentWord.gridy = 2;
 		panel.add(currentWord, gbc_currentWord);
 		
-		JLabel nextWord = new JLabel("\"\"");
+		nextWord = new JLabel("\"\"");
 		nextWord.setFont(new Font("Dialog", Font.BOLD, 13));
 		GridBagConstraints gbc_nextWord = new GridBagConstraints();
 		gbc_nextWord.gridx = 6;

@@ -11,7 +11,9 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
@@ -20,6 +22,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -54,6 +57,9 @@ public class Typer {
 	private JLabel scoreLable;
 	private JLabel timerLable;
 	private JButton startBtn;
+	
+	ImageIcon play, again;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -155,6 +161,13 @@ public class Typer {
 		panel.add(Enterbtn, gbc_Enterbtn);
 		
 		startBtn = new JButton("start");
+		//in the next line "Icons/play.png" is the path to the icon
+		play = new ImageIcon("Icons/play.png");
+		Image img1 = play.getImage();
+		Image newPlay = img1.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+		play = new ImageIcon(newPlay);
+		startBtn.setIcon(play);
+		startBtn.setBackground(Color.GREEN);
 		startBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				time();
@@ -163,6 +176,7 @@ public class Typer {
 				userinput.setEnabled(true);
 				frame.getRootPane().setDefaultButton(Enterbtn); //sets the EnterBtn as the button to be clicked when user hits Enter on their keyboard
 				userinput.requestFocusInWindow();  //focus on it so that user doesnt need to use the mouse
+				startBtn.setBackground(null);
 			}
 		});
 		GridBagConstraints gbc_startBtn = new GridBagConstraints();

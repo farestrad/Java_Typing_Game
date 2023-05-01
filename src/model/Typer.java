@@ -15,6 +15,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Typer {
 
@@ -38,6 +42,9 @@ public class Typer {
 	
 	int count = 0; //keep count of how many words solved
 	int currentLevel = 0; //keep track of which level user is at
+	int currentScore = 0;
+	private JTextField userinput;
+	private JButton Enterbtn;
 	/**
 	 * Launch the application.
 	 */
@@ -73,9 +80,9 @@ public class Typer {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		currentWord = new JLabel("\"\"");
@@ -89,9 +96,39 @@ public class Typer {
 		nextWord = new JLabel("\"\"");
 		nextWord.setFont(new Font("Dialog", Font.BOLD, 13));
 		GridBagConstraints gbc_nextWord = new GridBagConstraints();
+		gbc_nextWord.insets = new Insets(0, 0, 5, 0);
 		gbc_nextWord.gridx = 6;
 		gbc_nextWord.gridy = 3;
 		panel.add(nextWord, gbc_nextWord);
+		
+		userinput = new JTextField();
+		userinput.setEnabled(false);
+		GridBagConstraints gbc_userinput = new GridBagConstraints();
+		gbc_userinput.insets = new Insets(0, 0, 5, 0);
+		gbc_userinput.fill = GridBagConstraints.HORIZONTAL;
+		gbc_userinput.gridx = 6;
+		gbc_userinput.gridy = 4;
+		panel.add(userinput, gbc_userinput);
+		userinput.setColumns(10);
+		userinput.setEnabled(false);
+		
+		Enterbtn = new JButton("Enter");
+		Enterbtn.setEnabled(false);
+		Enterbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String userWord = userinput.getText();
+				if(userWord.contentEquals(original)) {
+					updateScore();
+					game();
+					userinput.setText("");
+					userinput.requestFocusInWindow();//auto focus so user can type directly without clicking on it with mouse
+				}
+			}
+		});
+		GridBagConstraints gbc_Enterbtn = new GridBagConstraints();
+		gbc_Enterbtn.gridx = 6;
+		gbc_Enterbtn.gridy = 5;
+		panel.add(Enterbtn, gbc_Enterbtn);
 		
 		allLevels.add(level1);
 		allLevels.add(level2);
@@ -184,6 +221,9 @@ public class Typer {
 		original = nextWord.getText(); //set text of original to the String in nextLabel
 		currentWord.setText(original); //now current word is original which is what used to be 'nextWord'
 		nextWord.setText(original2); //now nextWord is the new randomly selected word.
+	}
+	public void updateScore() {
+		currentScore++;
 	}
 	
 	

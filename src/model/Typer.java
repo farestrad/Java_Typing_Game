@@ -203,6 +203,13 @@ public class Typer {
 		panel.add(startBtn, gbc_startBtn);
 		
 		restartBtn = new JButton("Restart");
+		again = new ImageIcon("Icons/again.png");
+		Image img = again.getImage();
+		Image newAgain = img.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+		again = new ImageIcon(newAgain);
+		restartBtn.setIcon(again);
+		restartBtn.setBackground(Color.LIGHT_GRAY);
+				
 		restartBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//we want to resetgame here so we will do the method somewhere else then use it as a helper

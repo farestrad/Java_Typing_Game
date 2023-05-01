@@ -53,6 +53,7 @@ public class Typer {
 	private JButton Enterbtn;
 	private JLabel scoreLable;
 	private JLabel timerLable;
+	private JButton startBtn;
 	/**
 	 * Launch the application.
 	 */
@@ -152,6 +153,23 @@ public class Typer {
 		gbc_Enterbtn.gridx = 3;
 		gbc_Enterbtn.gridy = 5;
 		panel.add(Enterbtn, gbc_Enterbtn);
+		
+		startBtn = new JButton("start");
+		startBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				time();
+				Enterbtn.setEnabled(true);
+				startBtn.setEnabled(false);
+				userinput.setEnabled(true);
+				frame.getRootPane().setDefaultButton(Enterbtn); //sets the EnterBtn as the button to be clicked when user hits Enter on their keyboard
+				userinput.requestFocusInWindow();  //focus on it so that user doesnt need to use the mouse
+			}
+		});
+		GridBagConstraints gbc_startBtn = new GridBagConstraints();
+		gbc_startBtn.insets = new Insets(0, 0, 0, 5);
+		gbc_startBtn.gridx = 3;
+		gbc_startBtn.gridy = 6;
+		panel.add(startBtn, gbc_startBtn);
 		
 		allLevels.add(level1);
 		allLevels.add(level2);

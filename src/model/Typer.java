@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -14,8 +15,11 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,6 +32,8 @@ public class Typer {
 	JLabel nextWord;
 	String original;
 	String original2;
+	int sec = 90;
+	Timer t; //imports timer class
 	
 	public ArrayList<String> level1 = new ArrayList<>();
 	public ArrayList<String> level2 = new ArrayList<>();
@@ -46,6 +52,7 @@ public class Typer {
 	private JTextField userinput;
 	private JButton Enterbtn;
 	private JLabel scoreLable;
+	private JLabel timerLable;
 	/**
 	 * Launch the application.
 	 */
@@ -85,6 +92,13 @@ public class Typer {
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
+		
+		timerLable = new JLabel("Time: " + sec);
+		GridBagConstraints gbc_timerLable = new GridBagConstraints();
+		gbc_timerLable.insets = new Insets(0, 0, 5, 5);
+		gbc_timerLable.gridx = 0;
+		gbc_timerLable.gridy = 0;
+		panel.add(timerLable, gbc_timerLable);
 		
 		scoreLable = new JLabel("\"\"");
 		GridBagConstraints gbc_scoreLable = new GridBagConstraints();
@@ -233,9 +247,26 @@ public class Typer {
 	}
 	public void updateScore() {
 		currentScore++;
+		scoreLable.setText("Score: " + currentScore);
 	}
-	
-	
+	public void time() {
+		t = new Timer(1000, new ActionListener() { //calls the method every 1000 milisecond
+		
+		public void actionPerformed(ActionEvent e) { //this is the action performed by the action listener
+		if(sec == 0) { //times up!
+			t.stop();
+			JOptionPane.showMessageDialog(null, "GAME OVER!" + "\n" + "Your final score is: " + currentScore);
+			userinput.setEnabled(false);
+			Enterbtn.setEnabled(false);
+			sec = 90;
+			//resetGame
+		}
+		sec--;
+		timerLable.setText("Time: " + sec);
+		}
+	});
+	t.start(); //starts timer when this method is called
+	}
 	
 	
 	
